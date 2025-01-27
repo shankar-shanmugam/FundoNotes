@@ -1,0 +1,16 @@
+F:\c#practice\FundooNotes\RepositoryLayer\bin\Debug\netcoreapp3.1\RepositoryLayer.deps.json
+F:\c#practice\FundooNotes\RepositoryLayer\bin\Debug\netcoreapp3.1\RepositoryLayer.runtimeconfig.json
+F:\c#practice\FundooNotes\RepositoryLayer\bin\Debug\netcoreapp3.1\RepositoryLayer.runtimeconfig.dev.json
+F:\c#practice\FundooNotes\RepositoryLayer\bin\Debug\netcoreapp3.1\RepositoryLayer.dll
+F:\c#practice\FundooNotes\RepositoryLayer\bin\Debug\netcoreapp3.1\RepositoryLayer.pdb
+F:\c#practice\FundooNotes\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.csproj.AssemblyReference.cache
+F:\c#practice\FundooNotes\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.GeneratedMSBuildEditorConfig.editorconfig
+F:\c#practice\FundooNotes\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.AssemblyInfoInputs.cache
+F:\c#practice\FundooNotes\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.AssemblyInfo.cs
+F:\c#practice\FundooNotes\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.csproj.CoreCompileInputs.cache
+F:\c#practice\FundooNotes\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.dll
+F:\c#practice\FundooNotes\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.pdb
+F:\c#practice\FundooNotes\RepositoryLayer\obj\Debug\netcoreapp3.1\RepositoryLayer.genruntimeconfig.cache
+F:\c#practice\FundooNotes\RepositoryLayer\bin\Debug\netcoreapp3.1\CommonLayer.dll
+F:\c#practice\FundooNotes\RepositoryLayer\bin\Debug\netcoreapp3.1\CommonLayer.pdb
+F:\c#practice\FundooNotes\RepositoryLayer\obj\Debug\netcoreapp3.1\Reposito.A0A61804.Up2Date

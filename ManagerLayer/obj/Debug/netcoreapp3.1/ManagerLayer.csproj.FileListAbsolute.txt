@@ -13,3 +13,4 @@ F:\c#practice\FundooNotes\ManagerLayer\bin\Debug\netcoreapp3.1\RepositoryLayer.p
 F:\c#practice\FundooNotes\ManagerLayer\bin\Debug\netcoreapp3.1\CommonLayer.pdb
 F:\c#practice\FundooNotes\ManagerLayer\obj\Debug\netcoreapp3.1\ManagerLayer.csproj.AssemblyReference.cache
 F:\c#practice\FundooNotes\ManagerLayer\obj\Debug\netcoreapp3.1\ManagerL.73C23B7D.Up2Date
+F:\c#practice\FundooNotes\ManagerLayer\obj\Debug\netcoreapp3.1\ManagerLayer.sourcelink.json

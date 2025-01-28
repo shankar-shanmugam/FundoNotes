@@ -49,3 +49,9 @@ F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\CommonLayer.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\ManagerLayer.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\ManagerLayer.pdb
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\CommonLayer.pdb
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\c#practice\FundooNotes\FundooNotes\obj\Debug\netcoreapp3.1\FundooNotes.MvcApplicationPartsAssemblyInfo.cs
+F:\c#practice\FundooNotes\FundooNotes\obj\Debug\netcoreapp3.1\FundooNotes.sourcelink.json

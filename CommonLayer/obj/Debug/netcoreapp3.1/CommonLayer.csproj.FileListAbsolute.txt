@@ -7,3 +7,4 @@ F:\c#practice\FundooNotes\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.Assemb
 F:\c#practice\FundooNotes\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.csproj.CoreCompileInputs.cache
 F:\c#practice\FundooNotes\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.dll
 F:\c#practice\FundooNotes\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.pdb
+F:\c#practice\FundooNotes\CommonLayer\obj\Debug\netcoreapp3.1\CommonLayer.sourcelink.json

@@ -9,5 +9,7 @@ namespace RepositoryLayer.Interface
     public interface IUserRepository
     {
         public User RegisterUser(RegisterModel model);
+        public string Login(LoginModel model);
+        public bool EmailExists(string email);
     }
 }

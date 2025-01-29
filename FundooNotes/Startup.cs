@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using ManagerLayer.Interface;
 using ManagerLayer.Service;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,10 +33,26 @@ namespace FundooNotes
             services.AddControllers();
             services.AddDbContext<FundoDBContext>(a => a.UseSqlServer(Configuration["ConnectionStrings:DBConnection"]));
 
+            //swagger
             services.AddSwaggerGen();
 
             services.AddTransient<IUserRepository,UserRepository>();
             services.AddTransient<IUserManager, UserManager>();
+            
+            //RabbitMQ
+            services.AddMassTransit(x =>
+            {
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+                {
+                    config.UseHealthCheck(provider);
+                    config.Host(new Uri("rabbitmq://localhost"), h =>
+                    {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+                }));
+            });
+            services.AddMassTransitHostedService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +74,7 @@ namespace FundooNotes
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Employee API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FundoNotes API V1");
             });
 
             app.UseEndpoints(endpoints =>

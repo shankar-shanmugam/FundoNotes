@@ -1,19 +1,26 @@
 ﻿using CommonLayer.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using RepositoryLayer.Context;
 using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 
 namespace RepositoryLayer.Service
 {
     public class UserRepository : IUserRepository
     {
         private readonly FundoDBContext _dbContext;
+        private readonly IConfiguration _configuration;
 
-        public UserRepository(FundoDBContext context)
+        public UserRepository(FundoDBContext context, IConfiguration configuration)
         {
             _dbContext = context;
+            _configuration = configuration;
         }
 
         public bool EmailExists(string email)=>
@@ -49,10 +56,47 @@ namespace RepositoryLayer.Service
             string decodedPassword = Decode(user.Password);
             if (decodedPassword == model.Password)
             {
-                return $"{model.Email} user found in DB";
+                 return GenerateToken(user); ;
             }
             return null;
         }
+
+        private string GenerateToken(User user)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier,user.Email),
+                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
+            };
+            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
+               _configuration["Jwt:Audience"],
+                claims,
+                expires: DateTime.Now.AddMinutes(15),
+                signingCredentials: credentials);
+
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+
+        }
+
+        public ForgetPasswordModel ForgetPassword(string email)
+        {
+             var user =   _dbContext.User.FirstOrDefault(user => user.Email == email);
+          
+            if (user != null)
+            {
+                ForgetPasswordModel forgotPasswordModel = new ForgetPasswordModel();
+                forgotPasswordModel.UserId = user.Id;
+                forgotPasswordModel.Email = user.Email;
+                forgotPasswordModel.Token = GenerateToken(user);
+                return forgotPasswordModel;
+            }
+            else
+                throw new Exception("User Not Exist for requested email!!!");
+        }
+
 
         public static string EncodePassword(string password)
         {

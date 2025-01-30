@@ -24,7 +24,7 @@ namespace ManagerLayer.Service
 
        public ForgetPasswordModel ForgetPassword(string email) => _userRepository.ForgetPassword(email);
 
-
+        public bool ResetPassword(string email,ResetPasswordModel model)=>_userRepository.ResetPassword(email,model);
 
 
 

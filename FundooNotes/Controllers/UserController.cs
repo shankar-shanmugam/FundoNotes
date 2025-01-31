@@ -18,7 +18,6 @@ namespace FundooNotes.Controllers
     {
         private readonly IUserManager _userManager;
         private readonly IBus bus;
-     
 
         public UserController(IUserManager userManager, IBus _bus)
         {
@@ -107,7 +106,8 @@ namespace FundooNotes.Controllers
         public IActionResult ResetPassword(ResetPasswordModel request)
         {
             try
-            {
+            {  
+                // To inspect the claim types and values ex: custom_email:shankar@gmail.com
                 //var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
                 //return Ok(new { success = false, claims });
                 string email = User.Claims.FirstOrDefault(c => c.Type == "custom_email")?.Value;

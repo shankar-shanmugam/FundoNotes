@@ -20,9 +20,6 @@ namespace RepositoryLayer.Service
         public UserRepository(FundoDBContext context, IConfiguration configuration)
         {
             _dbContext = context;
-
-
-
             _configuration = configuration;
         }
 

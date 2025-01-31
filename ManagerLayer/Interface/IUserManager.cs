@@ -13,6 +13,7 @@ namespace ManagerLayer.Interface
         public string Login(LoginModel model);
 
         public bool EmailExists(string email);
-
+        ForgetPasswordModel ForgetPassword(string email);
+        public bool ResetPassword(string email, ResetPasswordModel model);
     }
 }

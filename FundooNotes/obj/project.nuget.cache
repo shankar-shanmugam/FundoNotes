@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5J/Ee7/budc=",
+  "dgSpecHash": "fikWGzUfS+g=",
   "success": true,
   "projectFilePath": "F:\\c#practice\\FundooNotes\\FundooNotes\\FundooNotes.csproj",
   "expectedPackageFiles": [
@@ -82,6 +82,9 @@
     "C:\\Users\\SHANKAR SHANMUGAM\\.nuget\\packages\\newid\\3.0.2\\newid.3.0.2.nupkg.sha512",
     "C:\\Users\\SHANKAR SHANMUGAM\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\SHANKAR SHANMUGAM\\.nuget\\packages\\newtonsoft.json.bson\\1.0.1\\newtonsoft.json.bson.1.0.1.nupkg.sha512",
+    "C:\\Users\\SHANKAR SHANMUGAM\\.nuget\\packages\\nlog\\5.4.0\\nlog.5.4.0.nupkg.sha512",
+    "C:\\Users\\SHANKAR SHANMUGAM\\.nuget\\packages\\nlog.extensions.logging\\5.4.0\\nlog.extensions.logging.5.4.0.nupkg.sha512",
+    "C:\\Users\\SHANKAR SHANMUGAM\\.nuget\\packages\\nlog.web.aspnetcore\\5.4.0\\nlog.web.aspnetcore.5.4.0.nupkg.sha512",
     "C:\\Users\\SHANKAR SHANMUGAM\\.nuget\\packages\\rabbitmq.client\\5.1.2\\rabbitmq.client.5.1.2.nupkg.sha512",
     "C:\\Users\\SHANKAR SHANMUGAM\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\SHANKAR SHANMUGAM\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

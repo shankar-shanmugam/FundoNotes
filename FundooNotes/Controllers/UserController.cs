@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace FundooNotes.Controllers
 {
@@ -18,11 +19,13 @@ namespace FundooNotes.Controllers
     {
         private readonly IUserManager _userManager;
         private readonly IBus bus;
+        private readonly ILogger<UserController> _log;
 
-        public UserController(IUserManager userManager, IBus _bus)
+        public UserController(IUserManager userManager, IBus _bus,ILogger<UserController> log)
         {
             _userManager = userManager;
             bus = _bus;
+            _log = log;
         }
 
         [HttpPost("register")]
@@ -93,7 +96,7 @@ namespace FundooNotes.Controllers
                 var endPoint = await bus.GetSendEndpoint(uri);
                 await endPoint.Send(forgotPasswordModel);
 
-                return Ok(new  { Success = true, Message = "Password reset email sent successfully" });
+                return Ok(new { Success = true, Message = "Password reset email sent successfully" });
             }
             catch (Exception ex)
             {
@@ -106,7 +109,7 @@ namespace FundooNotes.Controllers
         public IActionResult ResetPassword(ResetPasswordModel request)
         {
             try
-            {  
+            {
                 // To inspect the claim types and values ex: custom_email:shankar@gmail.com
                 //var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
                 //return Ok(new { success = false, claims });
@@ -130,7 +133,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { success = false, message = "An error occurred while resetting the password. Please try again later.",Data=ex.Message });
+                return StatusCode(500, new { success = false, message = "An error occurred while resetting the password. Please try again later.", Data = ex.Message });
             }
         }
 

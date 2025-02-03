@@ -3,6 +3,7 @@ using ManagerLayer.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using RepositoryLayer.Entity;
 using System;
 using System.Collections.Generic;
@@ -15,21 +16,27 @@ namespace FundooNotes.Controllers
     public class NotesController : ControllerBase
     {
         private readonly INotesManager _notesManager;
+        private readonly ILogger<NotesController> _logger;
 
-        public NotesController(INotesManager notesManager)
+        public NotesController(INotesManager notesManager,ILogger<NotesController> logger)
         {
             this._notesManager = notesManager;
+            _logger = logger;
         }
 
         [Authorize]
-        [HttpPost]
-        [Route("Create")]
+        [HttpPost("Create")]
         public IActionResult CreateNotes(NotesModel notesModel)
         {
             try
             {
-                int userId = Convert.ToInt32(User.Claims.FirstOrDefault(c => c.Type == "id")?.Value);
-                var notesResult = _notesManager.CreateNotes(notesModel, userId);
+                int? userId = GetUserId();
+                if (userId == null)
+                {
+                    return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
+                }
+
+                var notesResult = _notesManager.CreateNotes(notesModel, userId.Value);
                 if (notesResult != null)
                 {
                     return Ok(new { success = true, message = "Notes Creation Successful ", data = notesResult });
@@ -41,6 +48,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception ex)
             {
+
                 return StatusCode(500, new { success = false, message = $"error occured:{ex.Message} " });
             }
 
@@ -51,12 +59,12 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
-                if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+                int? userId = GetUserId();
+                if (userId == null)
                 {
                     return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
                 }
-                var listNotesResult = _notesManager.GetAllNotes(userId);
+                var listNotesResult = _notesManager.GetAllNotes(userId.Value);
 
                 if (!listNotesResult.Any())
                 {
@@ -81,11 +89,12 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                if (!int.TryParse(User.Claims.FirstOrDefault(c => c.Type == "id")?.Value, out int userId))
+                int? userId = GetUserId();
+                if (userId == null)
                 {
                     return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
                 }
-                var notesResult = _notesManager.GetNotes(userId, noteId);
+                var notesResult = _notesManager.GetNotes(userId.Value, noteId);
 
                 if (notesResult == null)
                 {
@@ -111,12 +120,12 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                // if something went wrong in conversion it will be invoked
-                if (!int.TryParse(User.Claims.FirstOrDefault(c => c.Type == "id")?.Value, out int userId))
+                int? userId = GetUserId();
+                if (userId == null)
                 {
                     return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
                 }
-                var UpdatedNote=_notesManager.UpdateNotes(userId, noteId,model);
+                var UpdatedNote=_notesManager.UpdateNotes(userId.Value, noteId,model);
                 if (UpdatedNote == null)
                 {
                     return NotFound(new
@@ -139,13 +148,13 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                // if something went wrong in conversion it will be invoked
-                if (!int.TryParse(User.Claims.FirstOrDefault(c => c.Type == "id")?.Value, out int userId))
+                int? userId = GetUserId();
+                if (userId == null)
                 {
                     return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
                 }
 
-                var IsDeleted = _notesManager.DeleteNote(userId, noteId);
+                var IsDeleted = _notesManager.DeleteNote(userId.Value, noteId);
 
                 if (!IsDeleted)
                 {
@@ -153,6 +162,163 @@ namespace FundooNotes.Controllers
                 }
                 return Ok(new { success = true, message = $"Deleted the Notes:{noteId} Successfully " });
 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = $"An error occurred while retrieving the note:{ex.Message}." });
+            }
+        }
+
+        [Authorize]
+        [HttpPatch("Pin")]
+        public IActionResult PinNotes(int noteId)
+        {
+            try
+            {
+                int? userId = GetUserId();
+                if (userId == null)
+                {
+                    return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
+                }
+
+                bool result = _notesManager.IsPinUnPinNotes(userId.Value, noteId);
+
+                if (result)
+                    return Ok(new { success = true, message = "Pin updated successfully." });
+
+                return NotFound(new { success = false, message = $"Note {noteId} not found for user {userId.Value}." });
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = $"An error occurred while retrieving the note:{ex.Message}." });
+            }
+        }
+
+        // Helper method to get User ID from claims
+        private int? GetUserId()
+        {
+            var idClaim = User.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
+            return int.TryParse(idClaim, out int userId) ? userId : (int?)null;
+        }
+
+        [Authorize]
+        [HttpPatch("Archive")]
+        public IActionResult ArchiveNotes(int noteId)
+        {
+            try
+            {
+
+                int? userId = GetUserId();
+                if (userId == null)
+                {
+                    return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
+                }
+
+                bool result = _notesManager.ToggleArchive(userId.Value, noteId);
+
+                if (result)
+                    return Ok(new { success = true, message = "Archive status updated successfully." });
+
+                return NotFound(new { success = false, message = $"Note {noteId} not found for user {userId.Value}." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = $"An error occurred :{ex.Message}." });
+            }
+        }
+        [Authorize]
+        [HttpPatch("Trash")]
+        public IActionResult TrashNotes(int noteId)
+        {
+            try
+            {
+                int? userId = GetUserId();
+                if (userId == null)
+                {
+                    return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
+                }
+
+                bool result = _notesManager.ToggleTrash(userId.Value, noteId);
+
+                if (result)
+                    return Ok(new { success = true, message = "Trash status updated successfully." });
+
+                return NotFound(new { success = false, message = $"Note {noteId} not found for user {userId.Value}." });
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = $"An error occurred :{ex.Message}." });
+            }
+        }
+
+        [Authorize]
+        [HttpPatch("Image")]
+        public IActionResult ImageNotes(string image,int noteId)
+        {
+            try
+            {
+                int? userId = GetUserId();
+                if (userId == null)
+                {
+                    return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
+                }
+
+                var result = _notesManager.ImageNotes(image, noteId, userId.Value);
+                if (result == null)
+                {
+                    return NotFound(new { success = false, message = $"Note {noteId} not found for user {userId.Value}." });
+                }
+                return Ok(new ResponseModel<string> { Success = true, Message = "Image Added successfully", Data = result });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = $"An error occurred :{ex.Message}." });
+            }
+        }
+
+        [Authorize]
+        [HttpPatch("BackgroundColor")]
+        public IActionResult ColorForNotes(string color, int noteId)
+        {
+            try
+            {
+                int? userId = GetUserId();
+                if (userId == null)
+                {
+                    return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
+                }
+
+                var result = _notesManager.BackgroundColor(color, noteId, userId.Value);
+                if (result == null)
+                {
+                    return NotFound(new { success = false, message = $"Note {noteId} not found for user {userId.Value}." });
+                }
+                return Ok(new ResponseModel<string> { Success = true, Message = "color Added successfully", Data = result });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = $"An error occurred while retrieving the note:{ex.Message}." });
+            }
+        }
+
+        [Authorize]
+        [HttpPatch("Remainder")]
+        public IActionResult AddRemainder(DateTime remainder, int noteId)
+        {
+            try
+            {
+                int? userId = GetUserId();
+                if (userId == null)
+                {
+                    return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
+                }
+
+                var result = _notesManager.AddRemainder(remainder, noteId, userId.Value);
+                if (result == null)
+                {
+                    return NotFound(new { success = false, message = $"Note {noteId} not found for user {userId.Value}." });
+                }
+                return Ok(new ResponseModel<string> { Success = true, Message = "Remainder Added successfully", Data = result });
             }
             catch (Exception ex)
             {

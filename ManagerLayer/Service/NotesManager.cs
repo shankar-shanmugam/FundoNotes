@@ -36,5 +36,28 @@ namespace ManagerLayer.Service
         public bool DeleteNote(int userId, int noteId)=>
 
             _notesRepository.DeleteNote(userId,noteId);
+
+        public bool IsPinUnPinNotes(int userId, int noteId)=>
+
+            _notesRepository.IsPinUnPinNotes((int)userId, noteId);
+
+        public bool ToggleTrash(int userId, int noteId)=>
+
+            _notesRepository.ToggleTrash(userId,noteId);
+       
+
+        public bool ToggleArchive(int userId, int noteId)=>
+            _notesRepository.ToggleArchive(userId,noteId);
+
+        public string AddRemainder(DateTime remainder, int noteId, int userId)=>
+            _notesRepository.AddRemainder(remainder,noteId,userId);
+       
+
+        public string BackgroundColor(string color, int noteId, int userId)=>
+            _notesRepository.BackgroundColor(color,noteId,userId);
+       
+        public string ImageNotes(string image, int noteId, int userId)=>
+            _notesRepository.ImageNotes(image,noteId,userId);
+        
     }
 }

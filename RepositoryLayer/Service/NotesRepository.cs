@@ -31,7 +31,7 @@ namespace RepositoryLayer.Service
                 IsArchive = model.IsArchive,
                 IsPin = model.IsPin,
                 IsTrash = model.IsTrash,
-                LastUpdatedAt = model.LastUpdatedAt,
+                LastUpdatedAt = DateTime.Now,
                 Remainder = model.Remainder,
                 Title = model.Title,
             };
@@ -53,9 +53,9 @@ namespace RepositoryLayer.Service
 
                 return notes;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
         public NotesEntity GetNotes(int userId, int noteId)
@@ -88,7 +88,7 @@ namespace RepositoryLayer.Service
                 {
                     notes.Remainder = notesModel.Remainder;
                     notes.Title = notesModel.Title;
-                    notes.LastUpdatedAt = notesModel.LastUpdatedAt;
+                    notes.LastUpdatedAt = DateTime.Now;
                     notes.Color = notesModel.Color;
                     notes.Description = notesModel.Description;
                     notes.Image = notesModel.Image;
@@ -107,9 +107,9 @@ namespace RepositoryLayer.Service
                     return null ;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             { 
-                throw; 
+                throw ex; 
             }
 
         }
@@ -126,11 +126,127 @@ namespace RepositoryLayer.Service
                 }
                 return false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
+            }
+        }
+        public bool IsPinUnPinNotes(int userId, int noteId)
+        {
+            try
+            {
+                var note = _dbContext.Notestable.SingleOrDefault(n => n.NotesId == noteId && n.Id == userId);
+
+                if (note == null)
+                    return false; 
+
+                note.IsPin = !note.IsPin;
+                note.LastUpdatedAt = DateTime.Now;
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public bool ToggleArchive(int userId, int noteId)
+        {
+            try
+            {
+                var note = _dbContext.Notestable.FirstOrDefault(n => n.NotesId == noteId && n.Id == userId);
+
+                if (note == null)
+                    return false;
+
+                note.IsArchive = !note.IsArchive;
+                note.LastUpdatedAt = DateTime.Now;
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch( Exception ex)
+            {
+                throw ex;
             }
         }
 
+        public bool ToggleTrash(int userId, int noteId)
+        {
+            try
+            {
+                var note = _dbContext.Notestable.FirstOrDefault(n => n.NotesId == noteId && n.Id == userId);
+
+                if (note == null)
+                    return false;
+
+                note.IsTrash = !note.IsTrash;
+                note.LastUpdatedAt = DateTime.Now;
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string ImageNotes(string image,int noteId,int userId)
+        {
+            try
+            {
+                var note = _dbContext.Notestable.FirstOrDefault(n => n.NotesId == noteId && n.Id == userId);
+                if (note == null)
+                    return null;
+
+                note.Image = image;
+                note.LastUpdatedAt = DateTime.Now;
+                _dbContext.SaveChanges();
+                return note.Image;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public string BackgroundColor(string color,int noteId,int userId)
+        {
+            try
+            {
+                var note = _dbContext.Notestable.FirstOrDefault(n => n.NotesId == noteId && n.Id == userId);
+                if (note == null)
+                    return null;
+
+                note.Color = color;
+                note.LastUpdatedAt = DateTime.Now;
+                _dbContext.SaveChanges();
+                return note.Color;
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string AddRemainder(DateTime remainder,int noteId,int userId)
+        {
+            try
+            {
+                var note = _dbContext.Notestable.FirstOrDefault(n => n.NotesId == noteId && n.Id == userId);
+                if (note == null) return null;
+                note.Remainder = remainder;
+                note.LastUpdatedAt = DateTime.Now;
+                _dbContext.SaveChanges();
+                return remainder.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

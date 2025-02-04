@@ -9,17 +9,17 @@ using System.Text;
 
 namespace RepositoryLayer.Service
 {
-    public class CollaboratorService
+    public class CollaboratorRepository : ICollaboratorRepository
     {
         private readonly FundoDBContext _dBContext;
-        private readonly ILogger<CollaboratorService> _logger;
+        private readonly ILogger<CollaboratorRepository> _logger;
 
-        public CollaboratorService(FundoDBContext dbContext, ILogger<CollaboratorService> logger)
+        public CollaboratorRepository(FundoDBContext dbContext, ILogger<CollaboratorRepository> logger)
         {
             _dBContext = dbContext;
             _logger = logger;
         }
-       
+
         public CollaboratorEntity CreateCollab(int notesId, string email)
         {
             try
@@ -55,13 +55,13 @@ namespace RepositoryLayer.Service
             }
         }
 
-        // 🔹 Retrieve Collaborators
-        public List<CollaboratorEntity> RetrieveCollab(int collabId)
+        //  Retrieve Collaborators
+        public List<CollaboratorEntity> RetrieveCollab(int noteId)
         {
             try
             {
                 return _dBContext.Collaboratortable
-                    .Where(x => x.CollaboratorId == collabId)
+                    .Where(x => x.NotesId == noteId)
                     .ToList();
             }
             catch (Exception ex)
@@ -71,11 +71,11 @@ namespace RepositoryLayer.Service
             }
         }
 
-        public bool DeleteCollab(int collabId, int userId)
+        public bool DeleteCollab(int collabId)
         {
             try
             {
-                var result = _dBContext.Collaboratortable.FirstOrDefault(x => x.CollaboratorId == collabId && x.UserId == userId);
+                var result = _dBContext.Collaboratortable.FirstOrDefault(x => x.CollaboratorId == collabId);
 
                 if (result == null)
                     return false; 

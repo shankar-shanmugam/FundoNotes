@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommonLayer.Models;
 using ManagerLayer.Interface;
 using ManagerLayer.Service;
 using MassTransit;
@@ -68,6 +69,13 @@ namespace FundooNotes
             services.AddTransient<INotesManager, NotesManager>();
             services.AddTransient<ILabelRepository, LabelRepository>();
             services.AddTransient<ILabelManager, LabelManager>();
+            services.AddTransient<ICollaboratorManager, CollaboratorManager>();
+            services.AddTransient<ICollaboratorRepository,CollaboratorRepository>();
+            // to register email and password to DI container 
+            services.AddSingleton(new EmailService(
+                                     Configuration["EmailSettings:FromEmail"],
+                                     Configuration["EmailSettings:Password"]
+                                                    ));
 
             //RabbitMQ
             services.AddMassTransit(x =>
@@ -103,6 +111,8 @@ namespace FundooNotes
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
+            // to Enable redis cache...
+            services.AddStackExchangeRedisCache(options => { options.Configuration = Configuration["RedisCacheUrl"]; });
 
         }
 
@@ -113,7 +123,7 @@ namespace FundooNotes
             {
                 app.UseDeveloperExceptionPage();
             }
-
+         
             app.UseAuthentication();
 
             app.UseHttpsRedirection();

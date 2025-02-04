@@ -1,5 +1,6 @@
 ﻿using ManagerLayer.Interface;
 using RepositoryLayer.Entity;
+using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,25 +9,25 @@ namespace ManagerLayer.Service
 {
     public class CollaboratorManager : ICollaboratorManager
     {
-        private readonly ICollaboratorManager collaboratorManager;
+        private readonly ICollaboratorRepository collaboratorRepository;
 
-        public CollaboratorManager(ICollaboratorManager collaboratorManager)
+        public CollaboratorManager(ICollaboratorRepository collaboratorRepository)
         {
-            this.collaboratorManager = collaboratorManager;
+            this.collaboratorRepository = collaboratorRepository;
         }
         public CollaboratorEntity CreateCollab(int noteId, string email)=>
         
-           collaboratorManager.CreateCollab(noteId, email);
+           collaboratorRepository.CreateCollab(noteId, email);
         
 
-        public bool DeleteCollab(int collabId, int userId)=>
+        public bool DeleteCollab(int collabId)=>
         
-            collaboratorManager.DeleteCollab(collabId, userId);
+            collaboratorRepository.DeleteCollab(collabId);
         
 
         public List<CollaboratorEntity> RetrieveCollab(int noteId)=>
         
-            collaboratorManager.RetrieveCollab(noteId);
+            collaboratorRepository.RetrieveCollab(noteId);
         
     }
 }

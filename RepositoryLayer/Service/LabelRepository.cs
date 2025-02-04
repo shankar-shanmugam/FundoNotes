@@ -21,16 +21,22 @@ namespace RepositoryLayer.Service
         {
             try
             {
-                var notes = _dbContext.Notestable.FirstOrDefault(notes => notes.NotesId == noteId);
-
-
-                if (notes == null)
+                // Check if the note exists and belongs to the user
+                var note = _dbContext.Notestable.FirstOrDefault(n => n.NotesId == noteId && n.Id == userId);
+                if (note == null)
                 {
-                    return null;
+                    return null;  
+                }
+                var existingLabel = _dbContext.Labeltable
+                    .FirstOrDefault(l => l.NoteId == noteId && l.UserId == userId && l.LabelName == name);
+
+                if (existingLabel != null)
+                {
+                    return existingLabel; 
                 }
                 LabelEntity label = new LabelEntity()
                 {
-                    LabelId = noteId,
+                    NoteId = noteId,
                     UserId = userId,
                     LabelName = name
                 };
@@ -57,11 +63,9 @@ namespace RepositoryLayer.Service
                 {
                     return null;
                 }
-
             }
             catch (Exception e)
             {
-
                 throw e;
             }
         }
@@ -83,7 +87,6 @@ namespace RepositoryLayer.Service
                 throw e;
             }
         }
-
         public LabelEntity EditLabel(int labelId, string labelName,int userId)
         {
             try

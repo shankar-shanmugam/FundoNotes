@@ -1,4 +1,6 @@
-﻿using CommonLayer.Models;
+﻿using CloudinaryDotNet;
+using CommonLayer.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using RepositoryLayer.Context;
 using RepositoryLayer.Entity;
@@ -6,6 +8,7 @@ using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 
 namespace RepositoryLayer.Service
@@ -13,10 +16,12 @@ namespace RepositoryLayer.Service
     public class NotesRepository : INotesRepository
     {
         private readonly FundoDBContext _dbContext;
+        private readonly IConfiguration configuration;
 
-        public NotesRepository(FundoDBContext dbContext)
+        public NotesRepository(FundoDBContext dbContext,IConfiguration configuration)
         {
             _dbContext = dbContext;
+            this.configuration = configuration;
         }
 
         public NotesEntity CreateNotes(NotesModel model, int userId)
@@ -192,7 +197,7 @@ namespace RepositoryLayer.Service
             }
         }
 
-        public string ImageNotes(string image,int noteId,int userId)
+        public string ImageNotes(string image, int noteId, int userId)
         {
             try
             {
@@ -211,6 +216,45 @@ namespace RepositoryLayer.Service
             }
 
         }
+        //public string ImageNotes(IFormFile image,int noteId,int userId)
+        //{
+        //    try
+        //    {
+        //        var result = _dbContext.Notestable.FirstOrDefault(x => x.NotesId == noteId && x.Id == userId);
+        //        if (result != null)
+        //        {
+        //            Account account = new Account(
+        //             configuration["CloudinarySettings:CloudName"],
+        //             configuration["CloudinarySettings:ApiKey"],
+        //             configuration["CloudinarySettings:ApiSecret"]
+
+        //                );
+        //            Cloudinary cloudinary = new Cloudinary(account);
+        //            var uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams()
+        //            {
+        //                File = new FileDescription(image.FileName, image.OpenReadStream()),
+        //                PublicId=result.Title
+        //            };
+        //            var uploadResult = cloudinary.Upload(uploadParams);
+        //            if (uploadResult != null)
+        //            {
+        //                result.LastUpdatedAt = DateTime.Now;
+        //                result.Image = uploadResult.Url.ToString();
+        //                _dbContext.SaveChanges();
+        //                return "Image Uploaded Successfully";
+        //            }
+        //            else throw new Exception($" Image not upload for the note id:{noteId} ");
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
         public string BackgroundColor(string color,int noteId,int userId)
         {

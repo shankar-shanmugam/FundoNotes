@@ -33,6 +33,7 @@ namespace FundooNotes.Controllers
         {
             try
             {
+                _log.LogInformation("Register User started");
                 if (model == null)
                     return BadRequest(new ResponseModel<string> { Success = false, Message = "Invalid registration details provided" });
 
@@ -50,6 +51,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception ex)
             {
+                _log.LogError(ex.Message);
                 return StatusCode(500, new ResponseModel<string> { Success = false, Message = "An internal error occurred", Data = ex.Message });
             }
         }
@@ -59,6 +61,7 @@ namespace FundooNotes.Controllers
         {
             try
             {
+                _log.LogInformation("Login started.............!!");
                 if (model == null)
                     return BadRequest(new ResponseModel<string> { Success = false, Message = "Invalid login details" });
 
@@ -71,6 +74,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception ex)
             {
+                _log.LogError(ex.Message);
                 return StatusCode(500, new ResponseModel<string> { Success = false, Message = "An internal error occurred", Data = ex.Message });
             }
         }
@@ -85,9 +89,10 @@ namespace FundooNotes.Controllers
 
                 ForgetPasswordModel forgotPasswordModel = _userManager.ForgetPassword(email);
                 if (forgotPasswordModel == null)
+              
                     return BadRequest(new ResponseModel<string> { Success = false, Message = "User with this email does not exist" });
 
-                // Send email
+                // send email
                 Send send = new Send();
                 send.SendMail(forgotPasswordModel.Email, forgotPasswordModel.Token);
 

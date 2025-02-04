@@ -22,7 +22,12 @@ F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.EntityFr
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.Extensions.PlatformAbstractions.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
@@ -36,11 +41,14 @@ F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bs
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\NLog.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\NLog.Extensions.Logging.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\NLog.Web.AspNetCore.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Pipelines.Sockets.Unofficial.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\RabbitMQ.Client.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\StackExchange.Redis.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\System.Diagnostics.PerformanceCounter.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
@@ -49,6 +57,7 @@ F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\runtimes\win\lib\n
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
@@ -77,3 +86,4 @@ F:\c#practice\FundooNotes\FundooNotes\obj\Debug\netcoreapp3.1\FundooNo.3D5DD6AD.
 F:\c#practice\FundooNotes\FundooNotes\obj\Debug\netcoreapp3.1\FundooNotes.dll
 F:\c#practice\FundooNotes\FundooNotes\obj\Debug\netcoreapp3.1\FundooNotes.pdb
 F:\c#practice\FundooNotes\FundooNotes\obj\Debug\netcoreapp3.1\FundooNotes.genruntimeconfig.cache
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll

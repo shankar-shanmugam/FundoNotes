@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace RepositoryLayer.Entity
 {
@@ -19,9 +20,9 @@ namespace RepositoryLayer.Entity
 
         [ForeignKey("CollaboratorUser")]
         public int UserId { get; set; }
-
+        [JsonIgnore]
         public virtual User CollaboratorUser { get; set; }
-
+        [JsonIgnore]
         public virtual NotesEntity CollaboratorNotes { get; set; }
     }
 }

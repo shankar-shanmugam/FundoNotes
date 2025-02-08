@@ -1,0 +1,204 @@
+2025-02-05 00:17:48.3190 INFO Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager - User profile is available. Using 'C:\Users\SHANKAR SHANMUGAM\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-02-05 00:17:49.0834 INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5000
+2025-02-05 00:17:49.0862 INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-02-05 00:17:49.0862 INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-02-05 00:17:49.0862 INFO Microsoft.Hosting.Lifetime - Content root path: F:\c#practice\FundooNotes\FundooNotes
+2025-02-05 00:17:49.6402 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html  
+2025-02-05 00:17:50.3991 WARN Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware - Failed to determine the https port for redirect.
+2025-02-05 00:17:50.5266 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 888.0818ms 200 text/html;charset=utf-8
+2025-02-05 00:17:50.5566 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink  
+2025-02-05 00:17:50.5771 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js  
+2025-02-05 00:17:50.5771 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 5.1807ms 200 application/javascript; charset=utf-8
+2025-02-05 00:17:50.7059 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 149.2402ms 200 text/javascript; charset=UTF-8
+2025-02-05 00:17:50.7763 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json  
+2025-02-05 00:17:50.9140 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 137.6834ms 200 application/json;charset=utf-8
+2025-02-05 00:18:30.9537 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 POST http://localhost:5000/api/User/login application/json 63
+2025-02-05 00:18:30.9780 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'FundooNotes.Controllers.UserController.Login (FundooNotes)'
+2025-02-05 00:18:31.0058 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(CommonLayer.Models.LoginModel) on controller FundooNotes.Controllers.UserController (FundooNotes).
+2025-02-05 00:18:31.1557 INFO FundooNotes.Controllers.UserController - Login started.............!!
+2025-02-05 00:18:31.5304 INFO Microsoft.EntityFrameworkCore.Infrastructure - Entity Framework Core 3.1.0 initialized 'FundoDBContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2025-02-05 00:18:32.0543 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (51ms) [Parameters=[@__model_Email_0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DOB], [u].[Email], [u].[FirstName], [u].[Gender], [u].[LastName], [u].[Password]
+FROM [User] AS [u]
+WHERE [u].[Email] = @__model_Email_0
+2025-02-05 00:18:32.1996 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'CommonLayer.Models.ResponseModel`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-02-05 00:18:32.2089 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action FundooNotes.Controllers.UserController.Login (FundooNotes) in 1198.3721ms
+2025-02-05 00:18:32.2089 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'FundooNotes.Controllers.UserController.Login (FundooNotes)'
+2025-02-05 00:18:32.2089 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 1258.9852ms 200 application/json; charset=utf-8
+2025-02-05 00:19:24.0570 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/api/Collaborator/get?noteId=1  
+2025-02-05 00:19:24.1031 INFO Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler - Successfully validated the token.
+2025-02-05 00:19:24.1093 INFO Microsoft.AspNetCore.Authorization.DefaultAuthorizationService - Authorization was successful.
+2025-02-05 00:19:24.1093 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes)'
+2025-02-05 00:19:24.1093 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "GetCollaborators", controller = "Collaborator"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCollaborators(Int32) on controller FundooNotes.Controllers.CollaboratorController (FundooNotes).
+2025-02-05 00:19:24.1347 INFO FundooNotes.Controllers.CollaboratorController - Fetching collaborators for note 1
+2025-02-05 00:19:24.1550 INFO Microsoft.EntityFrameworkCore.Infrastructure - Entity Framework Core 3.1.0 initialized 'FundoDBContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2025-02-05 00:19:24.1550 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (8ms) [Parameters=[@__noteId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [c].[CollaboratorId], [c].[Email], [c].[NotesId], [c].[UserId]
+FROM [Collaboratortable] AS [c]
+WHERE [c].[NotesId] = @__noteId_0
+2025-02-05 00:19:24.1756 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type '<>f__AnonymousType2`2[[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[RepositoryLayer.Entity.CollaboratorEntity, RepositoryLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-02-05 00:19:24.1756 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes) in 62.3376ms
+2025-02-05 00:19:24.1756 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes)'
+2025-02-05 00:19:24.1756 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 123.7219ms 200 application/json; charset=utf-8
+2025-02-05 00:19:40.8041 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 DELETE http://localhost:5000/api/Collaborator/delete?collabId=1  
+2025-02-05 00:19:40.8041 INFO Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler - Successfully validated the token.
+2025-02-05 00:19:40.8041 INFO Microsoft.AspNetCore.Authorization.DefaultAuthorizationService - Authorization was successful.
+2025-02-05 00:19:40.8041 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'FundooNotes.Controllers.CollaboratorController.RemoveCollaborator (FundooNotes)'
+2025-02-05 00:19:40.8175 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "RemoveCollaborator", controller = "Collaborator"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult RemoveCollaborator(Int32) on controller FundooNotes.Controllers.CollaboratorController (FundooNotes).
+2025-02-05 00:19:40.8175 INFO FundooNotes.Controllers.CollaboratorController - Removing collaborator 1 
+2025-02-05 00:19:40.8175 INFO Microsoft.EntityFrameworkCore.Infrastructure - Entity Framework Core 3.1.0 initialized 'FundoDBContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2025-02-05 00:19:40.8353 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (3ms) [Parameters=[@__collabId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [c].[CollaboratorId], [c].[Email], [c].[NotesId], [c].[UserId]
+FROM [Collaboratortable] AS [c]
+WHERE [c].[CollaboratorId] = @__collabId_0
+2025-02-05 00:19:40.9055 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+DELETE FROM [Collaboratortable]
+WHERE [CollaboratorId] = @p0;
+SELECT @@ROWCOUNT;
+2025-02-05 00:19:40.9055 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-02-05 00:19:40.9055 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action FundooNotes.Controllers.CollaboratorController.RemoveCollaborator (FundooNotes) in 98.7689ms
+2025-02-05 00:19:40.9055 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'FundooNotes.Controllers.CollaboratorController.RemoveCollaborator (FundooNotes)'
+2025-02-05 00:19:40.9055 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 115.6072ms 200 application/json; charset=utf-8
+2025-02-05 00:19:54.5839 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/api/Collaborator/get?noteId=1  
+2025-02-05 00:19:54.5839 INFO Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler - Successfully validated the token.
+2025-02-05 00:19:54.5839 INFO Microsoft.AspNetCore.Authorization.DefaultAuthorizationService - Authorization was successful.
+2025-02-05 00:19:54.5839 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes)'
+2025-02-05 00:19:54.5839 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "GetCollaborators", controller = "Collaborator"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCollaborators(Int32) on controller FundooNotes.Controllers.CollaboratorController (FundooNotes).
+2025-02-05 00:19:54.5939 INFO FundooNotes.Controllers.CollaboratorController - Fetching collaborators for note 1
+2025-02-05 00:19:54.5939 INFO Microsoft.EntityFrameworkCore.Infrastructure - Entity Framework Core 3.1.0 initialized 'FundoDBContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2025-02-05 00:19:54.6127 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (12ms) [Parameters=[@__noteId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [c].[CollaboratorId], [c].[Email], [c].[NotesId], [c].[UserId]
+FROM [Collaboratortable] AS [c]
+WHERE [c].[NotesId] = @__noteId_0
+2025-02-05 00:19:54.6127 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-02-05 00:19:54.6127 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes) in 23.0212ms
+2025-02-05 00:19:54.6127 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes)'
+2025-02-05 00:19:54.6127 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 33.1839ms 404 application/json; charset=utf-8
+2025-02-05 00:21:18.8376 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 POST http://localhost:5000/api/Collaborator/add?noteId=1&email=ramchandiraraj%40gmail.com  0
+2025-02-05 00:21:18.8376 INFO Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler - Successfully validated the token.
+2025-02-05 00:21:18.8376 INFO Microsoft.AspNetCore.Authorization.DefaultAuthorizationService - Authorization was successful.
+2025-02-05 00:21:18.8431 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'FundooNotes.Controllers.CollaboratorController.AddCollaborator (FundooNotes)'
+2025-02-05 00:21:18.8431 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "AddCollaborator", controller = "Collaborator"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AddCollaborator(Int32, System.String) on controller FundooNotes.Controllers.CollaboratorController (FundooNotes).
+2025-02-05 00:21:18.8431 INFO FundooNotes.Controllers.CollaboratorController - Adding collaborator ramchandiraraj@gmail.com to note 1
+2025-02-05 00:21:18.8431 INFO FundooNotes.Controllers.CollaboratorController - Attempting to get user ID from claims
+2025-02-05 00:21:18.8431 INFO Microsoft.EntityFrameworkCore.Infrastructure - Entity Framework Core 3.1.0 initialized 'FundoDBContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2025-02-05 00:21:18.8721 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (11ms) [Parameters=[@__8__locals1_notesId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [n].[NotesId], [n].[Color], [n].[CreatedAt], [n].[Description], [n].[Id], [n].[Image], [n].[IsArchive], [n].[IsPin], [n].[IsTrash], [n].[LastUpdatedAt], [n].[Remainder], [n].[Title]
+FROM [Notestable] AS [n]
+WHERE [n].[NotesId] = @__8__locals1_notesId_0
+2025-02-05 00:21:18.8851 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (6ms) [Parameters=[@__8__locals1_email_0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DOB], [u].[Email], [u].[FirstName], [u].[Gender], [u].[LastName], [u].[Password]
+FROM [User] AS [u]
+WHERE [u].[Email] = @__8__locals1_email_0
+2025-02-05 00:21:18.9045 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (13ms) [Parameters=[@__8__locals1_notesId_0='?' (DbType = Int32), @__emailResult_Id_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [c].[CollaboratorId], [c].[Email], [c].[NotesId], [c].[UserId]
+FROM [Collaboratortable] AS [c]
+WHERE ([c].[NotesId] = @__8__locals1_notesId_0) AND ([c].[UserId] = @__emailResult_Id_1)
+2025-02-05 00:21:18.9562 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (16ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Collaboratortable] ([Email], [NotesId], [UserId])
+VALUES (@p0, @p1, @p2);
+SELECT [CollaboratorId]
+FROM [Collaboratortable]
+WHERE @@ROWCOUNT = 1 AND [CollaboratorId] = scope_identity();
+2025-02-05 00:21:18.9766 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (3ms) [Parameters=[@__noteId_0='?' (DbType = Int32), @__userId_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [n].[NotesId], [n].[Color], [n].[CreatedAt], [n].[Description], [n].[Id], [n].[Image], [n].[IsArchive], [n].[IsPin], [n].[IsTrash], [n].[LastUpdatedAt], [n].[Remainder], [n].[Title]
+FROM [Notestable] AS [n]
+WHERE ([n].[NotesId] = @__noteId_0) AND ([n].[Id] = @__userId_1)
+2025-02-05 00:21:18.9844 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (3ms) [Parameters=[@__userId_Value_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DOB], [u].[Email], [u].[FirstName], [u].[Gender], [u].[LastName], [u].[Password]
+FROM [User] AS [u]
+WHERE [u].[Id] = @__userId_Value_0
+2025-02-05 00:21:22.7882 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type '<>f__AnonymousType1`3[[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[RepositoryLayer.Entity.CollaboratorEntity, RepositoryLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-02-05 00:21:22.7882 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action FundooNotes.Controllers.CollaboratorController.AddCollaborator (FundooNotes) in 3946.8085ms
+2025-02-05 00:21:22.7957 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'FundooNotes.Controllers.CollaboratorController.AddCollaborator (FundooNotes)'
+2025-02-05 00:21:22.7957 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 3959.0565ms 200 application/json; charset=utf-8
+2025-02-05 00:22:49.8020 INFO Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager - User profile is available. Using 'C:\Users\SHANKAR SHANMUGAM\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-02-05 00:22:50.3780 INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5000
+2025-02-05 00:22:50.3780 INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-02-05 00:22:50.3780 INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-02-05 00:22:50.3780 INFO Microsoft.Hosting.Lifetime - Content root path: F:\c#practice\FundooNotes\FundooNotes
+2025-02-05 00:22:50.6868 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html  
+2025-02-05 00:22:50.8388 WARN Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware - Failed to determine the https port for redirect.
+2025-02-05 00:22:50.9162 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 230.1121ms 200 text/html;charset=utf-8
+2025-02-05 00:22:50.9323 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink  
+2025-02-05 00:22:50.9428 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js  
+2025-02-05 00:22:50.9428 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 2.5288ms 200 application/javascript; charset=utf-8
+2025-02-05 00:22:50.9778 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 45.4586ms 200 text/javascript; charset=UTF-8
+2025-02-05 00:22:51.0033 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json  
+2025-02-05 00:22:51.1171 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 113.8582ms 200 application/json;charset=utf-8
+2025-02-05 00:23:29.3627 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 POST http://localhost:5000/api/User/login application/json 63
+2025-02-05 00:23:29.3627 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'FundooNotes.Controllers.UserController.Login (FundooNotes)'
+2025-02-05 00:23:29.3971 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(CommonLayer.Models.LoginModel) on controller FundooNotes.Controllers.UserController (FundooNotes).
+2025-02-05 00:23:29.5182 INFO FundooNotes.Controllers.UserController - Login started.............!!
+2025-02-05 00:23:29.8726 INFO Microsoft.EntityFrameworkCore.Infrastructure - Entity Framework Core 3.1.0 initialized 'FundoDBContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2025-02-05 00:23:30.3022 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (42ms) [Parameters=[@__model_Email_0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DOB], [u].[Email], [u].[FirstName], [u].[Gender], [u].[LastName], [u].[Password]
+FROM [User] AS [u]
+WHERE [u].[Email] = @__model_Email_0
+2025-02-05 00:23:30.4450 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'CommonLayer.Models.ResponseModel`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-02-05 00:23:30.4450 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action FundooNotes.Controllers.UserController.Login (FundooNotes) in 1050.5508ms
+2025-02-05 00:23:30.4450 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'FundooNotes.Controllers.UserController.Login (FundooNotes)'
+2025-02-05 00:23:30.4561 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 1093.5276ms 200 application/json; charset=utf-8
+2025-02-05 00:23:46.0668 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/api/Collaborator/get?noteId=1  
+2025-02-05 00:23:46.0781 INFO Microsoft.AspNetCore.Authorization.DefaultAuthorizationService - Authorization failed.
+2025-02-05 00:23:46.0781 INFO Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler - AuthenticationScheme: Bearer was challenged.
+2025-02-05 00:23:46.0781 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 15.9798ms 401 
+2025-02-05 00:24:14.6804 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/api/Collaborator/get?noteId=1  
+2025-02-05 00:24:14.7294 INFO Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler - Successfully validated the token.
+2025-02-05 00:24:14.7336 INFO Microsoft.AspNetCore.Authorization.DefaultAuthorizationService - Authorization was successful.
+2025-02-05 00:24:14.7336 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes)'
+2025-02-05 00:24:14.7336 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "GetCollaborators", controller = "Collaborator"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCollaborators(Int32) on controller FundooNotes.Controllers.CollaboratorController (FundooNotes).
+2025-02-05 00:24:14.7498 INFO FundooNotes.Controllers.CollaboratorController - Fetching collaborators for note 1
+2025-02-05 00:24:14.7704 INFO Microsoft.EntityFrameworkCore.Infrastructure - Entity Framework Core 3.1.0 initialized 'FundoDBContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2025-02-05 00:24:14.7986 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (21ms) [Parameters=[@__noteId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [c].[CollaboratorId], [c].[Email], [c].[NotesId], [c].[UserId]
+FROM [Collaboratortable] AS [c]
+WHERE [c].[NotesId] = @__noteId_0
+2025-02-05 00:24:14.7986 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type '<>f__AnonymousType2`2[[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[RepositoryLayer.Entity.CollaboratorEntity, RepositoryLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-02-05 00:24:14.7986 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes) in 67.425ms
+2025-02-05 00:24:14.7986 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes)'
+2025-02-05 00:24:14.7986 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 127.1845ms 200 application/json; charset=utf-8
+2025-02-05 00:28:21.2263 INFO Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager - User profile is available. Using 'C:\Users\SHANKAR SHANMUGAM\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-02-05 00:28:21.5929 INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5000
+2025-02-05 00:28:21.5929 INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-02-05 00:28:21.5929 INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-02-05 00:28:21.5929 INFO Microsoft.Hosting.Lifetime - Content root path: F:\c#practice\FundooNotes\FundooNotes
+2025-02-05 00:28:22.2145 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html  
+2025-02-05 00:28:22.3398 WARN Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware - Failed to determine the https port for redirect.
+2025-02-05 00:28:22.4102 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 197.191ms 200 text/html;charset=utf-8
+2025-02-05 00:28:22.4268 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink  
+2025-02-05 00:28:22.4369 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js  
+2025-02-05 00:28:22.4369 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 2.5388ms 200 application/javascript; charset=utf-8
+2025-02-05 00:28:22.4710 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 44.145ms 200 text/javascript; charset=UTF-8
+2025-02-05 00:28:22.5003 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json  
+2025-02-05 00:28:22.5868 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 86.4893ms 200 application/json;charset=utf-8
+2025-02-05 00:29:00.9449 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 POST http://localhost:5000/api/User/login application/json 63
+2025-02-05 00:29:00.9616 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'FundooNotes.Controllers.UserController.Login (FundooNotes)'
+2025-02-05 00:29:00.9924 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "Login", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(CommonLayer.Models.LoginModel) on controller FundooNotes.Controllers.UserController (FundooNotes).
+2025-02-05 00:29:01.2362 INFO FundooNotes.Controllers.UserController - Login started.............!!
+2025-02-05 00:29:01.9084 INFO Microsoft.EntityFrameworkCore.Infrastructure - Entity Framework Core 3.1.0 initialized 'FundoDBContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2025-02-05 00:29:02.6483 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (64ms) [Parameters=[@__model_Email_0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DOB], [u].[Email], [u].[FirstName], [u].[Gender], [u].[LastName], [u].[Password]
+FROM [User] AS [u]
+WHERE [u].[Email] = @__model_Email_0
+2025-02-05 00:29:02.8570 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type 'CommonLayer.Models.ResponseModel`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-02-05 00:29:02.8711 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action FundooNotes.Controllers.UserController.Login (FundooNotes) in 1870.4641ms
+2025-02-05 00:29:02.8711 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'FundooNotes.Controllers.UserController.Login (FundooNotes)'
+2025-02-05 00:29:02.8776 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 1932.8925ms 200 application/json; charset=utf-8
+2025-02-05 00:29:32.0386 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request starting HTTP/1.1 GET http://localhost:5000/api/Collaborator/get?noteId=1  
+2025-02-05 00:29:32.1148 INFO Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler - Successfully validated the token.
+2025-02-05 00:29:32.1306 INFO Microsoft.AspNetCore.Authorization.DefaultAuthorizationService - Authorization was successful.
+2025-02-05 00:29:32.1306 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executing endpoint 'FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes)'
+2025-02-05 00:29:32.1422 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Route matched with {action = "GetCollaborators", controller = "Collaborator"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetCollaborators(Int32) on controller FundooNotes.Controllers.CollaboratorController (FundooNotes).
+2025-02-05 00:29:32.1713 INFO FundooNotes.Controllers.CollaboratorController - Fetching collaborators for note 1
+2025-02-05 00:29:32.2018 INFO Microsoft.EntityFrameworkCore.Infrastructure - Entity Framework Core 3.1.0 initialized 'FundoDBContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2025-02-05 00:29:32.2222 INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (8ms) [Parameters=[@__noteId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [c].[CollaboratorId], [c].[Email], [c].[NotesId], [c].[UserId]
+FROM [Collaboratortable] AS [c]
+WHERE [c].[NotesId] = @__noteId_0
+2025-02-05 00:29:32.2353 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor - Executing ObjectResult, writing value of type '<>f__AnonymousType2`2[[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[RepositoryLayer.Entity.CollaboratorEntity, RepositoryLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-02-05 00:29:32.2353 INFO Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker - Executed action FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes) in 95.0078ms
+2025-02-05 00:29:32.2353 INFO Microsoft.AspNetCore.Routing.EndpointMiddleware - Executed endpoint 'FundooNotes.Controllers.CollaboratorController.GetCollaborators (FundooNotes)'
+2025-02-05 00:29:32.2353 INFO Microsoft.AspNetCore.Hosting.Diagnostics - Request finished in 202.7983ms 200 application/json; charset=utf-8

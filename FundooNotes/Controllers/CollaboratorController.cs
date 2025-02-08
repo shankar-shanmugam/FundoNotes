@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using NLog;
 using RepositoryLayer.Context;
 using RepositoryLayer.Entity;
 using System;
@@ -25,19 +25,19 @@ namespace FundooNotes.Controllers
         private readonly IDistributedCache distributedCache;
         private readonly FundoDBContext dBContext;
         private readonly ICollaboratorManager _collaboratorManager;
-        private readonly ILogger<CollaboratorController> _logger;
+        private readonly ILogger _logger;
         private readonly EmailService _emailService;
         private readonly IUserManager userManager;
         private readonly INotesManager notesManager;
         private readonly IBus _bus;
 
-        public CollaboratorController(IUserManager userManager,INotesManager notesManager,IBus _bus,EmailService _emailService, IDistributedCache distributedCache, FundoDBContext dBContext, ICollaboratorManager collaboratorManager, ILogger<CollaboratorController> logger)
+        public CollaboratorController(IUserManager userManager,INotesManager notesManager,IBus _bus,EmailService _emailService, IDistributedCache distributedCache, FundoDBContext dBContext, ICollaboratorManager collaboratorManager)
         {
             this.distributedCache = distributedCache;
             this.dBContext = dBContext;
             this._emailService = _emailService;
             _collaboratorManager = collaboratorManager;
-            _logger = logger;
+            _logger = LogManager.GetCurrentClassLogger();
             this.userManager = userManager;
             this.notesManager = notesManager;
             this._bus = _bus;
@@ -46,7 +46,7 @@ namespace FundooNotes.Controllers
         private int? GetUserId()
         {
             var idClaim = User.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
-            _logger.LogInformation("Attempting to get user ID from claims");
+            _logger.Info("Attempting to get user ID from claims");
             return int.TryParse(idClaim, out int userId) ? userId : (int?)null;
         }
 
@@ -56,13 +56,13 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                _logger.LogInformation($"Adding collaborator {email} to note {noteId}");
+                _logger.Info($"Adding collaborator {email} to note {noteId}");
 
 
                 int? userId = GetUserId();
                 if (userId == null)
                 {
-                    _logger.LogWarning("Unauthorized access attempt - Invalid or missing user ID");
+                    _logger.Warn("Unauthorized access attempt - Invalid or missing user ID");
                     return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
                 }
 
@@ -85,7 +85,7 @@ namespace FundooNotes.Controllers
                 }
                 catch (Exception emailEx)
                 {
-                    _logger.LogError($"Failed to send email: {emailEx.Message}");
+                    _logger.Error($"Failed to send email: {emailEx.Message}");
                 }
 
                 try
@@ -106,7 +106,7 @@ namespace FundooNotes.Controllers
                 }
                 catch (Exception mqEx)
                 {
-                    _logger.LogError($"Failed to send to RabbitMQ: {mqEx.Message}");
+                    _logger.Error($"Failed to send to RabbitMQ: {mqEx.Message}");
                 }
                
               return Ok(new { success = true, message = "Collaborator added successfully!", data = result });
@@ -114,7 +114,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error adding collaborator: {ex.Message}");
+                _logger.Error($"Error adding collaborator: {ex.Message}");
                 return StatusCode(500, new { success = false, message = "Internal Server Error" });
             }
         }
@@ -124,7 +124,7 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                _logger.LogInformation($"Fetching collaborators for note {noteId}");
+                _logger.Info($"Fetching collaborators for note {noteId}");
                 var result = _collaboratorManager.RetrieveCollab(noteId);
 
                 if (result != null && result.Count > 0)
@@ -134,7 +134,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error retrieving collaborators: {ex.Message}");
+                _logger.Error($"Error retrieving collaborators: {ex.Message}");
                 return StatusCode(500, new { success = false, message = "Internal Server Error" });
             }
         }
@@ -144,7 +144,7 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                _logger.LogInformation($"Removing collaborator {collabId} ");
+                _logger.Info($"Removing collaborator {collabId} ");
                 var result = _collaboratorManager.DeleteCollab(collabId);
 
                 if (result)
@@ -154,7 +154,7 @@ namespace FundooNotes.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error removing collaborator: {ex.Message}");
+                _logger.Error($"Error removing collaborator: {ex.Message}");
                 return StatusCode(500, new { success = false, message = "Internal Server Error" });
             }
         }

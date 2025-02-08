@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RepositoryLayer.Context;
 using RepositoryLayer.Entity;
@@ -14,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace FundooNotes.Controllers
 {
@@ -23,21 +23,21 @@ namespace FundooNotes.Controllers
     {
         private readonly FundoDBContext dBContext;
         private readonly ILabelManager _label;
-        private readonly ILogger<LabelController> _logger;
+        private readonly ILogger _logger;
         private readonly IDistributedCache distributedCache;
 
-        public LabelController(FundoDBContext dBContext, ILabelManager label, ILogger<LabelController> logger, IDistributedCache distributedCache)
+        public LabelController(FundoDBContext dBContext, ILabelManager label, IDistributedCache distributedCache)
         {
             this.dBContext = dBContext;
             _label = label;
-            _logger = logger;
+            _logger = LogManager.GetCurrentClassLogger();
             this.distributedCache = distributedCache;
         }
 
         private int? GetUserId()
         {
             var idClaim = User.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
-            _logger.LogInformation("Attempting to get user ID from claims");
+            _logger.Info("Attempting to get user ID from claims");  // Changed from LogInformation
             return int.TryParse(idClaim, out int userId) ? userId : (int?)null;
         }
 
@@ -47,31 +47,29 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                _logger.LogInformation("Creating new label. NoteId: {NoteId}, LabelName: {LabelName}", noteId, labelName);
-
+                _logger.Info($"Creating new label. NoteId: {noteId}, LabelName: {labelName}");  // Changed from LogInformation
                 int? userId = GetUserId();
                 if (userId == null)
                 {
-                    _logger.LogWarning("Unauthorized access attempt - Invalid or missing user ID");
+                    _logger.Warn("Unauthorized access attempt - Invalid or missing user ID");  // Changed from LogWarning
                     return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
                 }
-
                 var result = _label.CreateLabel(noteId, userId.Value, labelName);
                 if (result == null)
                 {
-                    _logger.LogWarning("Failed to create label for NoteId: {NoteId}, UserId: {UserId}", noteId, userId);
+                    _logger.Warn($"Failed to create label for NoteId: {noteId}, UserId: {userId}");  // Changed from LogWarning
                     return BadRequest(new { success = false, message = "Label not added ", });
                 }
-
-                _logger.LogInformation("Label created successfully. LabelId: {LabelId}, NoteId: {NoteId}", result.LabelId, noteId);
+                _logger.Info($"Label created successfully. LabelId: {result.LabelId}, NoteId: {noteId}");  // Changed from LogInformation
                 return Ok(new ResponseModel<LabelEntity> { Success = true, Message = "Label added successfully", Data = result });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error creating label. NoteId: {NoteId}, Error: {Error}", noteId, ex.Message);
+                _logger.Error(ex, $"Error creating label. NoteId: {noteId}, Error: {ex.Message}");  // Changed from LogError
                 return StatusCode(500, new { success = false, message = $"An error occurred :{ex.Message}." });
             }
         }
+
 
         [Authorize]
         [HttpPut("editLabel")]
@@ -79,28 +77,28 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                _logger.LogInformation("Editing label. LabelId: {LabelId}, NewName: {LabelName}", labelId, labelName);
+                _logger.Info("Editing label. LabelId: {LabelId}, NewName: {LabelName}", labelId, labelName);
 
                 int? userId = GetUserId();
                 if (userId == null)
                 {
-                    _logger.LogWarning("Unauthorized access attempt - Invalid or missing user ID");
+                    _logger.Warn("Unauthorized access attempt - Invalid or missing user ID");
                     return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
                 }
 
                 var result = _label.EditLabel(labelId, labelName, userId.Value);
                 if (result == null)
                 {
-                    _logger.LogWarning("Failed to edit label. LabelId: {LabelId}, UserId: {UserId}", labelId, userId);
+                    _logger.Warn("Failed to edit label. LabelId: {LabelId}, UserId: {UserId}", labelId, userId);
                     return BadRequest(new { success = false, message = "Label not added ", });
                 }
 
-                _logger.LogInformation("Label updated successfully. LabelId: {LabelId}", labelId);
+                _logger.Info("Label updated successfully. LabelId: {LabelId}", labelId);
                 return Ok(new ResponseModel<LabelEntity> { Success = true, Message = "Label updated successfully", Data = result });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error editing label. LabelId: {LabelId}, Error: {Error}", labelId, ex.Message);
+                _logger.Error(ex, "Error editing label. LabelId: {LabelId}, Error: {Error}", labelId, ex.Message);
                 return StatusCode(500, new { success = false, message = $"An error occurred :{ex.Message}." });
             }
         }
@@ -111,28 +109,28 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                _logger.LogInformation("Deleting label for NoteId: {NoteId}", labelId);
+                _logger.Info("Deleting label for NoteId: {NoteId}", labelId);
 
                 int? userId = GetUserId();
                 if (userId == null)
                 {
-                    _logger.LogWarning("Unauthorized access attempt - Invalid or missing user ID");
+                    _logger.Warn("Unauthorized access attempt - Invalid or missing user ID");
                     return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
                 }
 
                 var result = _label.DeleteLabel(labelId, userId.Value);
                 if (!result)
                 {
-                    _logger.LogWarning("Failed to delete label. NoteId: {NoteId}, UserId: {UserId}", labelId, userId);
+                    _logger.Warn("Failed to delete label. NoteId: {NoteId}, UserId: {UserId}", labelId, userId);
                     return BadRequest(new { success = false, message = "Label not added s", });
                 }
 
-                _logger.LogInformation("Label deleted successfully. NoteId: {NoteId}", labelId);
+                _logger.Info("Label deleted successfully. NoteId: {NoteId}", labelId);
                 return Ok(new ResponseModel<bool> { Success = true, Message = "Label Deleted successfully", Data = result });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error deleting label. NoteId: {NoteId}, Error: {Error}", labelId, ex.Message);
+                _logger.Error(ex, "Error deleting label. NoteId: {NoteId}, Error: {Error}", labelId, ex.Message);
                 return StatusCode(500, new { success = false, message = $"An error occurred :{ex.Message}." });
             }
         }
@@ -143,28 +141,28 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                _logger.LogInformation("Retrieving label. LabelId: {LabelId}", labelId);
+                _logger.Info("Retrieving label. LabelId: {LabelId}", labelId);
 
                 int? userId = GetUserId();
                 if (userId == null)
                 {
-                    _logger.LogWarning("Unauthorized access attempt - Invalid or missing user ID");
+                    _logger.Warn("Unauthorized access attempt - Invalid or missing user ID");
                     return Unauthorized(new { success = false, message = "Invalid or missing user ID." });
                 }
 
                 var result = _label.RetrieveLabel(labelId, userId.Value);
                 if (result == null)
                 {
-                    _logger.LogWarning("Label not found. LabelId: {LabelId}, UserId: {UserId}", labelId, userId);
+                    _logger.Warn("Label not found. LabelId: {LabelId}, UserId: {UserId}", labelId, userId);
                     return BadRequest(new { success = false, message = "Label not added" });
                 }
 
-                _logger.LogInformation("Label retrieved successfully. LabelId: {LabelId}", labelId);
+                _logger.Info("Label retrieved successfully. LabelId: {LabelId}", labelId);
                 return Ok(new ResponseModel<LabelEntity> { Success = true, Message = "Label Retrieved successfully", Data = result });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error retrieving label. LabelId: {LabelId}, Error: {Error}", labelId, ex.Message);
+                _logger.Error(ex, "Error retrieving label. LabelId: {LabelId}, Error: {Error}", labelId, ex.Message);
                 return StatusCode(500, new { success = false, message = $"An error occurred :{ex.Message}." });
             }
         }

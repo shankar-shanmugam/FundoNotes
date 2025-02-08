@@ -1,0 +1,9 @@
+2025-02-05 00:46:09.4053 INFO [CONTROLLER] Login started.............!!
+2025-02-05 00:46:42.6873 INFO [CONTROLLER] Retrieving label. LabelId: 1
+2025-02-05 00:46:42.7125 INFO [CONTROLLER] Attempting to get user ID from claims
+2025-02-05 00:46:42.8184 INFO [CONTROLLER] Label retrieved successfully. LabelId: 1
+2025-02-05 01:20:51.4063 INFO [CONTROLLER] Login attempt started
+2025-02-05 01:20:53.1916 INFO [CONTROLLER] Login successful for user: shankarshan2002@gmail.com
+2025-02-05 01:22:03.1561 INFO [CONTROLLER] Attempting to retrieve all notes
+2025-02-05 01:22:03.1561 INFO [CONTROLLER] Attempting to get user ID from claims
+2025-02-05 01:22:03.2493 INFO [CONTROLLER] Retrieved 4 notes for user 6

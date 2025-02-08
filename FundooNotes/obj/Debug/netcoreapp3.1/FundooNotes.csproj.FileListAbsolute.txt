@@ -8,6 +8,7 @@ F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\FundooNotes.runtim
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\FundooNotes.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\FundooNotes.pdb
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\Automatonymous.dll
+F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\GreenPipes.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\MassTransit.dll
 F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\MassTransit.AspNetCoreIntegration.dll
@@ -86,4 +87,3 @@ F:\c#practice\FundooNotes\FundooNotes\obj\Debug\netcoreapp3.1\FundooNo.3D5DD6AD.
 F:\c#practice\FundooNotes\FundooNotes\obj\Debug\netcoreapp3.1\FundooNotes.dll
 F:\c#practice\FundooNotes\FundooNotes\obj\Debug\netcoreapp3.1\FundooNotes.pdb
 F:\c#practice\FundooNotes\FundooNotes\obj\Debug\netcoreapp3.1\FundooNotes.genruntimeconfig.cache
-F:\c#practice\FundooNotes\FundooNotes\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
